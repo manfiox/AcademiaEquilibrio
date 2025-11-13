@@ -2113,13 +2113,14 @@ h4 { font-size: 1.5rem; }
     border: solid 1.9px #f37800;
     border-radius: 60px 8px;
     transition: var(--transition);
-    max-height: 90vh;
+    max-height: 95vh;
     overflow-y: auto;
     overflow-x: hidden;
-    margin: 2% auto;
+    margin: 1% auto;
     scroll-behavior: smooth;
     -webkit-overflow-scrolling: touch;
     padding-top: 4rem;
+    position: relative;
 }
 
 /* Scrollbar personalizada para o modal */

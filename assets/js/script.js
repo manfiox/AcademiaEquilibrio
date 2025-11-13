@@ -305,8 +305,7 @@ window.addEventListener('click', function(event) {
             if (lock) {
                 unlockScroll(lock);
             } else if (id === 'matriculaModal') {
-                // Restaura scroll do body para modal de matrícula
-                document.body.style.overflow = '';
+                // Modal de matrícula não bloqueia scroll, então não precisa restaurar
             }
         }
     });
