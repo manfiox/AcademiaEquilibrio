@@ -379,7 +379,14 @@ function handleExperimentalForm() {
 }
 
 // ========== PROCESSAR FORMULÁRIO DE MATRÍCULA ==========
-function handleMatriculaForm() {
+function handleMatriculaForm(e) {
+    // Funcionalidade temporariamente desabilitada
+    if (e) {
+        e.preventDefault();
+    }
+    return false;
+    
+    /* CÓDIGO COMENTADO - SERÁ REATIVADO POSTERIORMENTE
     const nome = document.getElementById('matricula-nome').value.trim();
     const cpf = document.getElementById('matricula-cpf').value.trim();
     const planoSelecionado = document.querySelector('input[name="plano"]:checked');
@@ -415,6 +422,7 @@ function handleMatriculaForm() {
     // Fechar modal e mostrar sucesso
     closeMatriculaModal();
     showSuccessMessage('Solicitação enviada! Você será redirecionado para o WhatsApp.');
+    */
 }
 
 // ========== MÁSCARA DE CPF ==========
