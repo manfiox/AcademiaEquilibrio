@@ -2102,6 +2102,9 @@ h4 { font-size: 1.5rem; }
     max-width: 500px;
     position: relative;
     box-shadow: var(--shadow-gold);
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
 }
 
 /* Modal de Matrícula - Maior */
@@ -2110,6 +2113,32 @@ h4 { font-size: 1.5rem; }
     border: solid 1.9px #f37800;
     border-radius: 60px 8px;
     transition: var(--transition);
+    max-height: 90vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin: 2% auto;
+    scroll-behavior: smooth;
+    -webkit-overflow-scrolling: touch;
+    padding-top: 4rem;
+}
+
+/* Scrollbar personalizada para o modal */
+#matriculaModal .modal-content::-webkit-scrollbar {
+    width: 8px;
+}
+
+#matriculaModal .modal-content::-webkit-scrollbar-track {
+    background: rgba(243, 120, 0, 0.1);
+    border-radius: 10px;
+}
+
+#matriculaModal .modal-content::-webkit-scrollbar-thumb {
+    background: var(--dourado);
+    border-radius: 10px;
+}
+
+#matriculaModal .modal-content::-webkit-scrollbar-thumb:hover {
+    background: #d86c01;
 }
 
 #matriculaModal .modal-content:hover{
@@ -2130,6 +2159,16 @@ h4 { font-size: 1.5rem; }
     color: var(--dourado);
     cursor: pointer;
     transition: var(--transition);
+    z-index: 10;
+    background: rgba(37, 37, 37, 0.9);
+    padding: 0.5rem;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    backdrop-filter: blur(5px);
 }
 
 .close:hover {
@@ -3350,7 +3389,21 @@ h4 { font-size: 1.5rem; }
     #matriculaModal .modal-content {
         max-width: 90%;
         padding: 2rem;
+        padding-top: 3.5rem;
         margin: 3% auto;
+        max-height: 95vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+    }
+    
+    .form-actions-matricula {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+    
+    .form-actions-matricula .btn {
+        width: 100%;
+        min-width: auto;
     }
 }
 
@@ -3374,11 +3427,66 @@ h4 { font-size: 1.5rem; }
     }
     
     #matriculaModal .modal-content {
-        padding: 1.5rem;
-        margin: 2% 10px;
+        padding: 1.5rem 1rem;
+        padding-top: 3rem;
+        margin: 1% 10px;
+        max-height: 98vh;
+        overflow-y: auto;
+        overflow-x: hidden;
+        border-radius: 20px 8px;
     }
     
     .planos-section-matricula h3 {
         font-size: 1.2rem;
+        flex-wrap: wrap;
+    }
+    
+    .planos-section-matricula h3 i {
+        font-size: 1.4rem;
+    }
+    
+    .modal-header {
+        margin-bottom: 1.5rem;
+    }
+    
+    .modal-header i {
+        font-size: 2.5rem;
+    }
+    
+    .modal-header h2 {
+        font-size: 1.5rem;
+    }
+    
+    .close {
+        top: 10px;
+        right: 15px;
+        font-size: 1.8rem;
+        z-index: 10;
+    }
+    
+    .form-row-matricula {
+        gap: 1rem;
+        margin-bottom: 1.5rem;
+    }
+    
+    .planos-section-matricula {
+        margin: 2rem 0;
+    }
+    
+    .plano-card-content-matricula {
+        padding: 1.25rem 1rem;
+        padding-top: 45px;
+    }
+    
+    .form-actions-matricula {
+        flex-direction: column;
+        gap: 0.75rem;
+        margin-top: 1.5rem;
+    }
+    
+    .form-actions-matricula .btn {
+        width: 100%;
+        min-width: auto;
+        padding: 12px 20px;
     }
 }

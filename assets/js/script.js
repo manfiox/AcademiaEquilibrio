@@ -130,13 +130,15 @@ function closeExperimentalModal() {
 function openMatriculaModal() {
     const modal = document.getElementById('matriculaModal');
     modal.style.display = 'block';
-    lockScroll('matricula');
+    // Não bloqueia scroll do body, pois o modal tem scroll interno
+    document.body.style.overflow = 'hidden';
 }
 
 function closeMatriculaModal() {
     const modal = document.getElementById('matriculaModal');
     modal.style.display = 'none';
-    unlockScroll('matricula');
+    // Restaura scroll do body
+    document.body.style.overflow = '';
 }
 
 function enviarMatricula(event) {
@@ -292,7 +294,7 @@ function closeModalidadeModal() {
 window.addEventListener('click', function(event) {
     const modals = [
         {id: 'experimentalModal', lock: 'experimental'},
-        {id: 'matriculaModal', lock: 'matricula'},
+        {id: 'matriculaModal', lock: null}, // Modal de matrícula não usa lockScroll
         {id: 'modalidadeModal', lock: 'modalidade'}
     ];
     
@@ -300,7 +302,12 @@ window.addEventListener('click', function(event) {
         const modal = document.getElementById(id);
         if (event.target === modal) {
             modal.style.display = 'none';
-            unlockScroll(lock);
+            if (lock) {
+                unlockScroll(lock);
+            } else if (id === 'matriculaModal') {
+                // Restaura scroll do body para modal de matrícula
+                document.body.style.overflow = '';
+            }
         }
     });
 });
