@@ -5,16 +5,43 @@
 
 // ========== GERENCIAMENTO DE SCROLL ==========
 let scrollLocks = new Set();
+let scrollPosition = 0;
 
 function lockScroll(lockId) {
     scrollLocks.add(lockId);
+    
+    // Salvar posição atual do scroll
+    scrollPosition = window.pageYOffset || document.documentElement.scrollTop;
+    
+    // Bloquear scroll do body
     document.body.style.overflow = 'hidden';
+    document.body.style.position = 'fixed';
+    document.body.style.width = '100%';
+    document.body.style.top = `-${scrollPosition}px`;
+    
+    // Adicionar classe para CSS
+    if (lockId.includes('popup')) {
+        document.body.classList.add('popup-open');
+    } else {
+        document.body.classList.add('modal-open');
+    }
 }
 
 function unlockScroll(lockId) {
     scrollLocks.delete(lockId);
+    
     if (scrollLocks.size === 0) {
+        // Restaurar scroll do body
         document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.top = '';
+        
+        // Restaurar posição do scroll
+        window.scrollTo(0, scrollPosition);
+        
+        // Remover classes
+        document.body.classList.remove('modal-open', 'popup-open');
     }
 }
 
@@ -116,21 +143,28 @@ function initHeaderScroll() {
 // ========== MODAL AULA EXPERIMENTAL ==========
 function openExperimentalModal() {
     const modal = document.getElementById('experimentalModal');
-    modal.style.display = 'block';
-    lockScroll('experimental');
+    if (modal) {
+        modal.style.display = 'flex';
+        modal.classList.add('active');
+        lockScroll('experimental');
+    }
 }
 
 function closeExperimentalModal() {
     const modal = document.getElementById('experimentalModal');
-    modal.style.display = 'none';
-    unlockScroll('experimental');
+    if (modal) {
+        modal.style.display = 'none';
+        modal.classList.remove('active');
+        unlockScroll('experimental');
+    }
 }
 
-// ========== MODAL DE MATRÍCULA ==========
+// ========== MODAL DE MATRÍCULA ========== */
 function openMatriculaModal() {
     const modal = document.getElementById('matriculaModal');
     if (modal) {
-        modal.style.display = 'block';
+        modal.style.display = 'flex';
+        modal.classList.add('active');
         lockScroll('matricula');
         // Fechar menu mobile se estiver aberto
         if (window.innerWidth < 992) {
@@ -147,6 +181,7 @@ function closeMatriculaModal() {
     const modal = document.getElementById('matriculaModal');
     if (modal) {
         modal.style.display = 'none';
+        modal.classList.remove('active');
         unlockScroll('matricula');
         // Limpar formulário
         const form = document.getElementById('matriculaForm');
@@ -219,7 +254,7 @@ function openModalidadeModal(modalidade) {
     const content = document.getElementById('modalidadeContent');
     const info = modalidadesInfo[modalidade];
     
-    if (info) {
+    if (info && modal) {
         content.innerHTML = `
             <div class="modal-header">
                 <i class="fas ${info.icone}"></i>
@@ -255,29 +290,34 @@ function openModalidadeModal(modalidade) {
             </div>
         `;
         
-        modal.style.display = 'block';
+        modal.style.display = 'flex';
+        modal.classList.add('active');
         lockScroll('modalidade');
     }
 }
 
 function closeModalidadeModal() {
     const modal = document.getElementById('modalidadeModal');
-    modal.style.display = 'none';
-    unlockScroll('modalidade');
+    if (modal) {
+        modal.style.display = 'none';
+        modal.classList.remove('active');
+        unlockScroll('modalidade');
+    }
 }
 
 // ========== FECHAR MODALS AO CLICAR FORA ==========
 window.addEventListener('click', function(event) {
     const modals = [
-        {id: 'experimentalModal', lock: 'experimental', display: 'block'},
-        {id: 'modalidadeModal', lock: 'modalidade', display: 'block'},
-        {id: 'matriculaModal', lock: 'matricula', display: 'block'}
+        {id: 'experimentalModal', lock: 'experimental'},
+        {id: 'modalidadeModal', lock: 'modalidade'},
+        {id: 'matriculaModal', lock: 'matricula'}
     ];
     
-    modals.forEach(({id, lock, display}) => {
+    modals.forEach(({id, lock}) => {
         const modal = document.getElementById(id);
         if (modal && event.target === modal) {
             modal.style.display = 'none';
+            modal.classList.remove('active');
             if (lock) {
                 unlockScroll(lock);
             }
