@@ -19,8 +19,9 @@
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, var(--preto-grafite) 0%, #0d0d0d 100%);
-    overflow: hidden;
+    overflow: visible;
     padding: 120px 20px 80px;
+    overscroll-behavior: none;
 }
 
 .modalidades-hero::before {
@@ -120,7 +121,8 @@
     border-bottom: 3.5px solid var(--dourado);
     border-left: 3.5px solid var(--dourado);
     position: relative;
-
+    overflow: visible;
+    overscroll-behavior: none;
 }
 
 .modalidades-section .container {
@@ -135,6 +137,8 @@
     align-items: center;
     margin-bottom: 6rem;
     position: relative;
+    overscroll-behavior: none;
+    touch-action: pan-y;
 }
 
 .modalidade-premium-card:last-child {
@@ -157,6 +161,8 @@
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
     transition: var(--transition);
+    overscroll-behavior: none;
+    touch-action: pan-y;
 }
 
 .card-image img {

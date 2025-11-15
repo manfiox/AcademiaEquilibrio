@@ -188,6 +188,8 @@ document.addEventListener('DOMContentLoaded', function() {
     initFormValidation();
     initExperimentalPopup();
     initPlanosCardScrollFix();
+    initModalidadesCardScrollFix();
+    initSobreCardScrollFix();
     
     // Garantir scroll desbloqueado após um pequeno delay
     setTimeout(ensureScrollUnlocked, 500);
@@ -1046,12 +1048,79 @@ function initPlanosCardScrollFix() {
     });
 }
 
+// ========== PREVENIR SCROLL INTERNO NOS CARDS DE MODALIDADES ==========
+function initModalidadesCardScrollFix() {
+    const modalidadeCards = document.querySelectorAll('.modalidade-card, .modalidade-premium-card');
+    
+    modalidadeCards.forEach(card => {
+        // Prevenir que o card capture eventos de scroll
+        card.addEventListener('wheel', function(e) {
+            // Se o card não tem scroll interno, permitir que o scroll da página funcione
+            if (card.scrollHeight <= card.clientHeight) {
+                // Permitir que o scroll da página funcione normalmente
+                return true;
+            }
+        }, { passive: true });
+        
+        // Prevenir touch scroll dentro do card em mobile
+        card.addEventListener('touchmove', function(e) {
+            // Se o card não tem scroll interno, permitir que o scroll da página funcione
+            if (card.scrollHeight <= card.clientHeight) {
+                return true;
+            }
+        }, { passive: true });
+        
+        // Garantir que o card não capture eventos de scroll
+        card.style.overscrollBehavior = 'none';
+        card.style.touchAction = 'pan-y';
+    });
+}
+
+// ========== PREVENIR SCROLL INTERNO NOS CARDS DE SOBRE ==========
+function initSobreCardScrollFix() {
+    const sobreCards = document.querySelectorAll('.mvv-card, .profissional-card, .estrutura-item');
+    
+    sobreCards.forEach(card => {
+        // Prevenir que o card capture eventos de scroll
+        card.addEventListener('wheel', function(e) {
+            // Se o card não tem scroll interno, permitir que o scroll da página funcione
+            if (card.scrollHeight <= card.clientHeight) {
+                // Permitir que o scroll da página funcione normalmente
+                return true;
+            }
+        }, { passive: true });
+        
+        // Prevenir touch scroll dentro do card em mobile
+        card.addEventListener('touchmove', function(e) {
+            // Se o card não tem scroll interno, permitir que o scroll da página funcione
+            if (card.scrollHeight <= card.clientHeight) {
+                return true;
+            }
+        }, { passive: true });
+        
+        // Garantir que o card não capture eventos de scroll
+        card.style.overscrollBehavior = 'none';
+        card.style.touchAction = 'pan-y';
+    });
+}
+
 // Re-inicializar caso os cards sejam adicionados dinamicamente (após DOMContentLoaded)
 setTimeout(function() {
     const observer = new MutationObserver(function(mutations) {
         const planosCards = document.querySelectorAll('.plano-premium-card');
+        const modalidadeCards = document.querySelectorAll('.modalidade-card, .modalidade-premium-card');
+        const sobreCards = document.querySelectorAll('.mvv-card, .profissional-card, .estrutura-item');
+        
         if (planosCards.length > 0) {
             initPlanosCardScrollFix();
+        }
+        
+        if (modalidadeCards.length > 0) {
+            initModalidadesCardScrollFix();
+        }
+        
+        if (sobreCards.length > 0) {
+            initSobreCardScrollFix();
         }
     });
     

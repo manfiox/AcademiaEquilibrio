@@ -965,6 +965,8 @@ h4 { font-size: 1.5rem; }
     position: relative;
     border-bottom: 3.5px solid #f37800;
     border-left: 3.5px solid #f37800;
+    overflow: visible;
+    overscroll-behavior: none;
 }
 
 .sobre::before {
@@ -982,6 +984,8 @@ h4 { font-size: 1.5rem; }
     align-items: center;
     position: relative;
     z-index: 2;
+    overflow: visible;
+    overscroll-behavior: none;
 }
 
 .sobre-image {
@@ -992,6 +996,8 @@ h4 { font-size: 1.5rem; }
         0 20px 60px rgba(0, 0, 0, 0.5),
         0 0 40px rgba(243, 120, 0, 0.3);
     border: 2px solid rgba(243, 120, 0, 0.3);
+    overscroll-behavior: none;
+    touch-action: pan-y;
 }
 
 .sobre-image::before {
@@ -1112,6 +1118,8 @@ h4 { font-size: 1.5rem; }
     position: relative;
     border-right: 3.5px solid #f37800;
     border-bottom: 3.5px solid #f37800;
+    overflow: visible;
+    overscroll-behavior: none;
 }
 
 /* Chanfrado laranja direito */
@@ -1133,6 +1141,8 @@ h4 { font-size: 1.5rem; }
     gap: 2rem;
     position: relative;
     z-index: 2;
+    overflow: visible;
+    overscroll-behavior: none;
 }
 
 .modalidade-card {
@@ -1143,6 +1153,22 @@ h4 { font-size: 1.5rem; }
     box-shadow: var(--shadow-md);
     position: relative;
     border-top: 3px solid var(--dourado);
+    overscroll-behavior: none;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: auto;
+    /* Garantir que o scroll da página funcione mesmo quando o mouse está sobre o card */
+    pointer-events: auto;
+}
+
+/* Garantir que elementos dentro do card não bloqueiem o scroll */
+.modalidade-card * {
+    pointer-events: auto;
+}
+
+/* Permitir que o scroll da página funcione quando o mouse está sobre o card */
+.modalidade-card,
+.modalidade-card * {
+    overscroll-behavior-y: none;
 }
 
 .modalidade-card::before {
@@ -1155,6 +1181,9 @@ h4 { font-size: 1.5rem; }
     background: var(--dourado);
     opacity: 0;
     transition: opacity 0.3s;
+    pointer-events: none;
+    overscroll-behavior: none;
+    touch-action: none;
 }
 
 .modalidade-card:hover::before {
@@ -1170,6 +1199,8 @@ h4 { font-size: 1.5rem; }
     position: relative;
     height: 250px;
     overflow: hidden;
+    overscroll-behavior: none;
+    touch-action: pan-y;
 }
 
 .modalidade-image img {

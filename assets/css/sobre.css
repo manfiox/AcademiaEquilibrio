@@ -18,8 +18,9 @@
     align-items: center;
     justify-content: center;
     background: linear-gradient(135deg, var(--preto-grafite) 0%, #0d0d0d 100%);
-    overflow: hidden;
+    overflow: visible;
     padding: 120px 20px 80px;
+    overscroll-behavior: none;
 }
 
 .sobre-hero::before {
@@ -433,12 +434,16 @@
     background: var(--preto-grafite);
     border-right: 3.5px solid var(--dourado);
     border-bottom: 3.5px solid var(--dourado);
+    overflow: visible;
+    overscroll-behavior: none;
 }
 
 .mvv-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
     gap: 3rem;
+    overflow: visible;
+    overscroll-behavior: none;
 }
 
 .mvv-card {
@@ -448,6 +453,21 @@
     border: 2px solid rgba(243, 120, 0, 0.3);
     text-align: center;
     transition: all 0.4s ease;
+    overscroll-behavior: none;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: auto;
+    pointer-events: auto;
+}
+
+/* Garantir que elementos dentro do card não bloqueiem o scroll */
+.mvv-card * {
+    pointer-events: auto;
+}
+
+/* Permitir que o scroll da página funcione quando o mouse está sobre o card */
+.mvv-card,
+.mvv-card * {
+    overscroll-behavior-y: none;
 }
 
 .mvv-card:hover {
@@ -509,12 +529,16 @@
     padding: 6rem 0;
     border-left: 3.5px solid var(--dourado);
     border-bottom: 3.5px solid var(--dourado);
+    overflow: visible;
+    overscroll-behavior: none;
 }
 
 .estrutura-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
     gap: 2rem;
+    overflow: visible;
+    overscroll-behavior: none;
 }
 
 .estrutura-item {
@@ -523,6 +547,14 @@
     overflow: hidden;
     height: 350px;
     cursor: pointer;
+    overscroll-behavior: none;
+    touch-action: pan-y;
+    pointer-events: auto;
+}
+
+.estrutura-item * {
+    pointer-events: auto;
+    overscroll-behavior-y: none;
 }
 
 .estrutura-imagem {
@@ -578,12 +610,16 @@
     background: var(--preto-grafite);
     border-right: 3.5px solid var(--dourado);
     border-bottom: 3.5px solid var(--dourado);
+    overflow: visible;
+    overscroll-behavior: none;
 }
 
 .profissionais-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
     gap: 3rem;
+    overflow: visible;
+    overscroll-behavior: none;
 }
 
 .profissional-card {
@@ -593,6 +629,21 @@
     overflow: hidden;
     transition: all 0.4s ease;
     text-align: center;
+    overscroll-behavior: none;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: auto;
+    pointer-events: auto;
+}
+
+/* Garantir que elementos dentro do card não bloqueiem o scroll */
+.profissional-card * {
+    pointer-events: auto;
+}
+
+/* Permitir que o scroll da página funcione quando o mouse está sobre o card */
+.profissional-card,
+.profissional-card * {
+    overscroll-behavior-y: none;
 }
 
 .profissional-card:hover {
