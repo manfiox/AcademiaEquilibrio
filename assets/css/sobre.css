@@ -116,10 +116,11 @@
     padding: 6rem 0;
     background: var(--preto-grafite);
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     border-top: 3.5px solid var(--dourado);
     border-bottom: 3.5px solid var(--dourado);
     border-right: 3.5px solid var(--dourado);
+    overscroll-behavior: none;
 }
 
 .timeline-section .section-header {
@@ -146,6 +147,8 @@
     max-width: 1000px;
     margin: 0 auto;
     padding-left: 50px;
+    overflow: visible;
+    overscroll-behavior: none;
 }
 
 /* Linha vertical principal */
@@ -158,6 +161,9 @@
     width: 4px;
     background: rgba(243, 120, 0, 0.2);
     border-radius: 2px;
+    pointer-events: none;
+    overscroll-behavior: none;
+    touch-action: none;
 }
 
 /* Linha de progresso animada */
@@ -172,6 +178,9 @@
     box-shadow: 0 0 20px rgba(243, 120, 0, 0.6);
     animation: progressLine 1s ease-out forwards;
     animation-delay: 0.2s;
+    pointer-events: none;
+    overscroll-behavior: none;
+    touch-action: none;
 }
 
 @keyframes progressLine {
@@ -184,6 +193,9 @@
     position: relative;
     margin-bottom: 4rem;
     padding-left: 50px;
+    overscroll-behavior: none;
+    touch-action: pan-y;
+    pointer-events: auto;
 }
 
 .timeline-item:last-child {
@@ -203,6 +215,9 @@
     z-index: 2;
     box-shadow: 0 0 0 4px rgba(243, 120, 0, 0.2);
     transition: all 0.3s ease;
+    pointer-events: none;
+    overscroll-behavior: none;
+    touch-action: none;
 }
 
 .timeline-dot.featured {
@@ -238,6 +253,16 @@
     transition: all 0.4s ease;
     position: relative;
     overflow: hidden;
+    overscroll-behavior: none;
+    touch-action: pan-y;
+    -webkit-overflow-scrolling: auto;
+    pointer-events: auto;
+}
+
+/* Garantir que elementos dentro do timeline-content não bloqueiem o scroll */
+.timeline-content * {
+    pointer-events: auto;
+    overscroll-behavior-y: none;
 }
 
 .timeline-content::before {
@@ -249,6 +274,9 @@
     height: 100%;
     background: linear-gradient(90deg, transparent, rgba(243, 120, 0, 0.1), transparent);
     transition: left 0.6s ease;
+    pointer-events: none;
+    overscroll-behavior: none;
+    touch-action: none;
 }
 
 .timeline-content:hover::before {
@@ -330,6 +358,8 @@
     padding: 6rem 0;
     border-left: 3.5px solid var(--dourado);
     border-bottom: 3.5px solid var(--dourado);
+    overflow: visible;
+    overscroll-behavior: none;
 }
 
 .historia-wrapper {
@@ -337,6 +367,8 @@
     grid-template-columns: 1fr 1fr;
     gap: 4rem;
     align-items: center;
+    overflow: visible;
+    overscroll-behavior: none;
 }
 
 .historia-imagem {
@@ -344,6 +376,8 @@
     border-radius: 20px;
     overflow: hidden;
     box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6);
+    overscroll-behavior: none;
+    touch-action: pan-y;
 }
 
 .historia-imagem img {
@@ -851,9 +885,10 @@
 .cta-final-section {
     padding: 6rem 0;
     position: relative;
-    overflow: hidden;
+    overflow: visible;
     border-left: 3.5px solid var(--dourado);
     border-bottom: 5px solid var(--dourado);
+    overscroll-behavior: none;
 }
 
 .cta-final-section::before {
@@ -865,6 +900,9 @@
     height: 200%;
     background: radial-gradient(circle, rgba(243, 120, 0, 0.1) 0%, transparent 70%);
     animation: rotate 20s linear infinite;
+    pointer-events: none;
+    overscroll-behavior: none;
+    touch-action: none;
 }
 
 .cta-final-content {

@@ -1078,29 +1078,31 @@ function initModalidadesCardScrollFix() {
 
 // ========== PREVENIR SCROLL INTERNO NOS CARDS DE SOBRE ==========
 function initSobreCardScrollFix() {
-    const sobreCards = document.querySelectorAll('.mvv-card, .profissional-card, .estrutura-item');
+    const sobreCards = document.querySelectorAll('.mvv-card, .profissional-card, .estrutura-item, .timeline-item, .timeline-content');
     
     sobreCards.forEach(card => {
-        // Prevenir que o card capture eventos de scroll
-        card.addEventListener('wheel', function(e) {
-            // Se o card não tem scroll interno, permitir que o scroll da página funcione
-            if (card.scrollHeight <= card.clientHeight) {
-                // Permitir que o scroll da página funcione normalmente
-                return true;
-            }
-        }, { passive: true });
-        
-        // Prevenir touch scroll dentro do card em mobile
-        card.addEventListener('touchmove', function(e) {
-            // Se o card não tem scroll interno, permitir que o scroll da página funcione
-            if (card.scrollHeight <= card.clientHeight) {
-                return true;
-            }
-        }, { passive: true });
-        
         // Garantir que o card não capture eventos de scroll
         card.style.overscrollBehavior = 'none';
         card.style.touchAction = 'pan-y';
+        
+        // Prevenir que o card capture eventos de scroll - sempre permitir scroll da página
+        // Usar uma única função para evitar conflitos
+        const handleWheel = function(e) {
+            // Sempre permitir que o scroll da página funcione
+            // Não prevenir o comportamento padrão
+            return true;
+        };
+        
+        const handleTouchMove = function(e) {
+            // Sempre permitir que o scroll da página funcione
+            return true;
+        };
+        
+        // Adicionar listeners apenas uma vez
+        card.removeEventListener('wheel', handleWheel);
+        card.removeEventListener('touchmove', handleTouchMove);
+        card.addEventListener('wheel', handleWheel, { passive: true });
+        card.addEventListener('touchmove', handleTouchMove, { passive: true });
     });
 }
 
@@ -1109,7 +1111,7 @@ setTimeout(function() {
     const observer = new MutationObserver(function(mutations) {
         const planosCards = document.querySelectorAll('.plano-premium-card');
         const modalidadeCards = document.querySelectorAll('.modalidade-card, .modalidade-premium-card');
-        const sobreCards = document.querySelectorAll('.mvv-card, .profissional-card, .estrutura-item');
+        const sobreCards = document.querySelectorAll('.mvv-card, .profissional-card, .estrutura-item, .timeline-item, .timeline-content');
         
         if (planosCards.length > 0) {
             initPlanosCardScrollFix();
