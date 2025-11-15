@@ -440,14 +440,14 @@ function handleExperimentalForm() {
     const modalidade = document.getElementById('exp-modalidade').value;
     
     // Criar mensagem para WhatsApp
-    const whatsappMessage = `🌟 AULA EXPERIMENTAL GRÁTIS 🌟%0A%0A` +
-                           `Nome: ${nome}%0A` +
-                           `Telefone: ${telefone}%0A` +
-                           `Modalidade: ${modalidade}%0A%0A` +
+    const whatsappMessage = `🌟 AULA EXPERIMENTAL GRÁTIS 🌟\n\n` +
+                           `Nome: ${nome}\n` +
+                           `Telefone: ${telefone}\n` +
+                           `Modalidade: ${modalidade}\n\n` +
                            `Gostaria de agendar minha aula experimental!`;
     
     // Redirecionar para WhatsApp
-    window.open(`https://wa.me/5515999999999?text=${whatsappMessage}`, '_blank');
+    window.open(`https://wa.me/5515999999999?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
     
     // Fechar modal e mostrar sucesso
     closeExperimentalModal();
@@ -495,15 +495,15 @@ function handleMatriculaForm(e) {
     const cpfLinha = `|  CPF:  ${cpf}`;
     const planoLinha = `|  PLANO SELECIONADO: ${plano}`;
     
-    const whatsappMessage = `Olá, vim pelo site e gostaria de dar início a minha matrícula...%0A%0A` +
-                           `${linhaSuperior}%0A` +
-                           `${linhaVazia}%0A` +
-                           `${linhaTitulo}%0A` +
-                           `${linhaVazia}%0A` +
-                           `${nomeLinha}${' '.repeat(Math.max(0, 56 - nomeLinha.length))}|%0A` +
-                           `${cpfLinha}${' '.repeat(Math.max(0, 56 - cpfLinha.length))}|%0A` +
-                           `${planoLinha}${' '.repeat(Math.max(0, 56 - planoLinha.length))}|%0A` +
-                           `${linhaVazia}%0A` +
+    const whatsappMessage = `Olá, vim pelo site e gostaria de dar início a minha matrícula...\n\n` +
+                           `${linhaSuperior}\n` +
+                           `${linhaVazia}\n` +
+                           `${linhaTitulo}\n` +
+                           `${linhaVazia}\n` +
+                           `${nomeLinha}${' '.repeat(Math.max(0, 56 - nomeLinha.length))}|\n` +
+                           `${cpfLinha}${' '.repeat(Math.max(0, 56 - cpfLinha.length))}|\n` +
+                           `${planoLinha}${' '.repeat(Math.max(0, 56 - planoLinha.length))}|\n` +
+                           `${linhaVazia}\n` +
                            `${linhaSuperior}`;
     
     // Redirecionar para WhatsApp
